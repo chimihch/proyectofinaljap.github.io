@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body, html {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.left-panel {
+  flex: 1;
+  background-color: #FF7323;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.logo-box {
+  text-align: center;
+}
+
+.logo {
+  width: 700px;
+  margin-bottom: 20px;
+}
+
+.right-panel {
+  flex: 1;
+  background-color: #FAF3EF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  background-color: #FF7323;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  width: 520px;
+  color: white;
+}
+
+.login-icon img {
+  width: 60px;
+  height: 60px;
+  margin-top: -100px;
+  margin-bottom: 30px;
+  border-radius: 50%; /* para que quede completamente redonda */
+  border: 3px solid #fff; /* borde blanco */
+}
+
+.login-card h2 {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.login-card form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-card input {
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+}
+
+.login-card button {
+  background-color: #1E00A8;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 12px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.login-card button:hover {
+  background-color: #150077;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.links a {
+  color: white;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}

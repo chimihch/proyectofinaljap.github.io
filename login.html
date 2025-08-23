@@ -1,38 +1,41 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title> OrangGo- Market</title>
-  
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
-  <style>
-    body {
-      background-color: rgb(248, 249, 250);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login OranGo Market</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-  <main class="mt-5">
+    
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    
+    <div class="left-panel">
+      <div class="logo-box">
+        <img src="/proyectofinaljap.github.io/img/1.png" alt="Logo OrangGo Market" class="logo">
       </div>
     </div>
-  </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-    </div>
-  </footer>
-  <script src="js/login.js"></script>
-</body>
 
+    
+    <div class="right-panel">
+    <div class="login-card">
+  <div class="login-icon">
+    <img src="/proyectofinaljap.github.io/img/password.webp" alt="Icono seguridad">
+  </div>
+  <h2>INICIA SESIÓN AHORA</h2>
+  
+  <!-- Formulario real -->
+  <form class="form-container">
+    <input type="text" id="username" placeholder="Usuario" required>
+    <input type="password" id="password" placeholder="Contraseña" required>
+    <button type="submit" id="login-btn">ACCESO</button>
+  </form>
+
+  <div class="links">
+    <a href="#">Crear una cuenta</a>
+    <a href="#">Recuperar contraseña</a>
+  </div>
+</div>
+<script src="/js/login.js"></script>
+</body>
 </html>
