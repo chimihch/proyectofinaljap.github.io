@@ -92,42 +92,74 @@ nav ul li a:hover {
   max-width: 300px;
 }
 
-.products {
-  display: flex;
-  gap: 100px;
-  justify-content: center;
-  margin: 30px;
+.mb-4 {
+  margin-bottom: 1.5rem !important;
+  text-align: center;
 }
 
-.product-card {
+#products-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  margin-top: 30px;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.card {
   background: #fff4ee;
   border-radius: 10px;
   overflow: hidden;
   width: 250px;
+  height: 330px;
+  flex: 1;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position:relative;
 }
 
-.product-card img {
+.card-body {
+  flex-grow: 1;
+flex-shrink: 1;
+flex-basis: auto;
+padding: 1rem 1rem;
+}
+
+.card-title {
+  margin-bottom: .5rem;
+}
+
+.card .card-footer {
+  padding: .5rem 1rem;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background-color: #ffd5b5;
+}
+
+
+.card img {
   width: 100%;
   display: block;
 }
 
-.product-card .info {
+.card .info {
   padding: 15px;
   background: #fff4ee;
 }
 
-.product-card .info h3 {
+.card .card-body h5 {
   font-size: 16px;
   color: #000;
 }
 
-.product-card .info p {
+small {
   font-size: 14px;
   color: #333;
+  float: right;
 }
 
-.product-card .info .price {
+.card .card-footer span{
   font-weight: bold;
   color: #ff6600;
   margin-top: 10px;
