@@ -188,3 +188,13 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+
+
+.navbar-light {
+    background-color: #FF7323 !important;
+    border: none !important;
+    border-width:0!important;
+
+}
+
