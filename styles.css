@@ -49,6 +49,7 @@ body, html {
   text-align: center;
   width: 520px;
   color: white;
+  margin: 5%;
 }
 
 .login-icon img {
@@ -109,9 +110,6 @@ body, html {
     width: 100%;
     min-height: 250px;
   }
-  .login-card {
-  
-  }
 
    .left-panel {
     display: none;
@@ -119,8 +117,6 @@ body, html {
 }
 
 @media (max-width: 600px) {
-  .login-card {
-  }
 
   .right-panel {
     background-color: #FF7323;
@@ -128,9 +124,7 @@ body, html {
   .left-panel {
     display: none;
   }
-  .login-icon img {
- 
-  }
+
   .links {
     flex-direction: column;
     gap: 8px;

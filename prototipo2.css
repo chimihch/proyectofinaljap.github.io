@@ -13,9 +13,10 @@ body {
 header {
   background-color: #ff6600;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 30px;
+  padding: 10px 30px;
 }
 
 header .logo {
@@ -32,10 +33,17 @@ header .logo img {
   width: auto;
 }
 
+.cart img {
+  height: 20px;
+  vertical-align: middle;
+}
+
 nav ul {
   list-style: none;
   display: flex;
   gap: 25px;
+  margin: 15px 10px;
+  vertical-align: middle;
 }
 
 nav ul li a {
@@ -56,6 +64,7 @@ nav ul li a:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .hero h1 {
@@ -103,8 +112,8 @@ nav ul li a:hover {
   gap: 30px;
   justify-content: center;
   margin-top: 30px;
-  margin-left: 15%;
-  margin-right: 15%;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 .card {
@@ -175,4 +184,38 @@ small {
     width: 80%;
     margin-bottom: 20px;
   }
+}
+
+@media (max-width: 400px) {
+
+  .hero img,
+  .hero .search-box input {
+    max-width: 100%;
+  }
+
+  header {
+    align-items: center;
+    padding: 10px 2%;
+  }
+
+  header .logo {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero .search-box {
+    width: 100%;
+  }
+
+  nav ul {
+    gap: 13px;
+    margin: 15px 0;
+    justify-content: center;
+  }
+
+  .menu {
+      width: 100%;
+  }
+
 }
