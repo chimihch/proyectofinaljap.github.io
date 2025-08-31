@@ -30,11 +30,13 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item">
+            <span class="nav-link" id="user-name"></span>
           </li>
         </ul>
       </div>
     </div>
   </nav>
+
   <main>
     <div class="jumbotron text-center"></div>
     <div class="album py-5 bg-light">
@@ -77,6 +79,7 @@
       </div>
     </div>
   </main>
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
@@ -85,9 +88,21 @@
       <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
     </div>
   </footer>
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/index.js"></script>
   <script src="js/init.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const userName = sessionStorage.getItem('userName');
+      const userNameSpan = document.getElementById('user-name');
+
+      if (userName && userNameSpan) {
+        userNameSpan.textContent = userName;
+      }
+    });
+  </script>
 </body>
 
 </html>
