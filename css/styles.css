@@ -1,3 +1,48 @@
+header {
+  background-color: #ff6600;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #000;
+}
+
+header .logo img {
+  height: 40px;  
+  width: auto;
+}
+
+.cart img {
+  height: 20px;
+  vertical-align: middle;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 15px 10px;
+  vertical-align: middle;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color:#000; 
+  font-weight: 600;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
 .jumbotron,
 .card-body,
 .container,
@@ -198,3 +243,9 @@ a.custom-card:hover {
 
 }
 
+.btn btn-lg btn-success w-100 {
+    background-color: #FF7323 !important;
+    border: none !important;
+    border-width:0!important;
+
+}

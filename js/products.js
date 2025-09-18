@@ -29,7 +29,7 @@ function showProducts(products) {
   products.forEach(product => {
     container.innerHTML += `
       <div class="col-md-4">
-        <div class="card h-100 shadow-sm">
+        <div class="card h-100 shadow-sm ver-producto" data-id="${product.id}">
           <img src="${product.image}" class="card-img-top" alt="${product.name}">
           <div class="card-body">
             <h5 class="card-title">${product.name}</h5>
@@ -43,4 +43,17 @@ function showProducts(products) {
       </div>
     `;
   });
+document.querySelectorAll(".ver-producto").forEach(card => {
+    card.addEventListener("click", () => {
+      const productId = card.getAttribute("data-id"); // obtenemos el id desde el data-id de la card
+      console.log("Producto clickeado:", productId); // debug
+      localStorage.setItem("selectedProductId", productId);
+      window.location = "product-info.html";
+    });
+  });
 }
+
+if (!localStorage.getItem('sesionIniciada')) {
+        alert("Por favor, inicia sesión.");
+         window.location.href = "login.html";
+    }

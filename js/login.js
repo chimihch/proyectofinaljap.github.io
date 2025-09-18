@@ -10,15 +10,17 @@ document.addEventListener('DOMContentLoaded', function() {
             const username = usernameInput.value.trim();
             const password = passwordInput.value.trim();
 
-            if (username !== '' && password !== '') {
-                // Guardar usuario en sessionStorage (solo mientras dure la pestaña)
-                sessionStorage.setItem('userName', username);
-
-                // Redirigir a la página principal
-                window.location.href = 'index.html'; 
-            } else {
+            if (username === '' || password === '') {
                 alert('Por favor, ingresa tu usuario y contraseña.');
+                return;
             }
+
+            // Guardamos la sesión ficticia
+            localStorage.setItem('sesionIniciada', 'true');
+            localStorage.setItem('userName', username);
+
+            alert('Autenticación exitosa. Redireccionando...');
+            window.location.href = 'index.html'; // portada
         });
     }
 });
