@@ -12,29 +12,23 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <header class="navbar">
+    <div class="logo">
+        <img src="workspace-de-0/logo-orango.png" alt="OranGo-Market">
+    OranGo-Market
+</div>
+    <nav class="menu">
+      <ul id="menuUL">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="categories.html">Categorías</a></li>
+      <li><a href="sell.html">Vender</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="#">👤 <span id="user-name"></span></a></li>
+      <li><a href="carrito.html" class="cart"><img src="workspace-de-0/basket-cart-icon-27.png" alt="Carrito"></a></li>
+
+      </ul>
+    </nav>
+  </header>
   <div class="container">
     <div class="text-center p-4">
       <h2>Vender</h2>
@@ -221,6 +215,16 @@
       <div></div>
     </div>
   </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const userName = localStorage.getItem('userName');
+      const userNameSpan = document.getElementById('user-name');
+
+      if (userName && userNameSpan) {
+        userNameSpan.textContent = userName;
+      }
+    });
+  </script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/dropzone.js"></script>
   <script src="js/init.js"></script>
