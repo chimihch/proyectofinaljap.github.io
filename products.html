@@ -14,19 +14,19 @@
    <header class="navbar">
     <div class="logo">
         <img src="workspace-de-0/logo-orango.png" alt="OranGo-Market">
-    OranGo-Market
-</div>
+        OranGo-Market
+    </div>
     <nav class="menu">
       <ul id="menuUL">
-      <li><a href="index.html">Inicio</a></li>
-      <li><a href="categories.html">Categorías</a></li>
-      <li><a href="sell.html">Vender</a></li>
-      <li><a href="contacto.html">Contacto</a></li>
-      <li><a href="carrito.html" class="cart"><img src="workspace-de-0/basket-cart-icon-27.png" alt="Carrito"></a></li>
-
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="categories.html">Categorías</a></li>
+        <li><a href="sell.html">Vender</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="carrito.html" class="cart"><img src="workspace-de-0/basket-cart-icon-27.png" alt="Carrito"></a></li>
       </ul>
     </nav>
   </header>
+
   <section class="hero">
     <div class="hero-text">
       <h1>Encuentra lo que buscas al mejor precio</h1>
@@ -43,12 +43,32 @@
   <main class="pb-5 container">
     <div class="container mt-4">
       <h2 class="mb-4" id="category-title"></h2>
+
+      <!-- Controles de filtro y orden -->
+      <div class="mb-3 d-flex flex-wrap gap-2 align-items-center">
+        <label for="sort" class="form-label mb-0 me-2">Ordenar por:</label>
+        <select id="sort" class="form-select w-auto">
+          <option value="price-asc">Precio (menor a mayor)</option>
+          <option value="price-desc">Precio (mayor a menor)</option>
+          <option value="relevance-desc">Relevancia (más vendidos)</option>
+        </select>
+
+        <label class="ms-3 mb-0">Precio mínimo:</label>
+        <input type="number" id="minPrice" class="form-control w-auto" placeholder="Min">
+
+        <label class="ms-2 mb-0">Precio máximo:</label>
+        <input type="number" id="maxPrice" class="form-control w-auto" placeholder="Max">
+
+        <button id="filterBtn" class="btn btn-primary ms-2">Filtrar</button>
+        <button id="clearFilterBtn" class="btn btn-secondary ms-2">Limpiar</button>
+      </div>
+
       <div id="products-container" class="row g-3">
         <!-- se muestran los productos -->
       </div>
     </div>
   </main>
-  </div>
+
   <script src="js/products.js"></script>
   <script src="js/init.js"></script>
 </body>
