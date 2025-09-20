@@ -29,14 +29,14 @@ function showProducts(products) {
   products.forEach(product => {
     container.innerHTML += `
       <div class="col-md-4">
-        <div class="card h-100 shadow-sm ver-producto" data-id="${product.id}">
+        <div class="card" data-id="${product.id}">
           <img src="${product.image}" class="card-img-top" alt="${product.name}">
           <div class="card-body">
             <h5 class="card-title">${product.name}</h5>
             <p class="card-text">${product.description}</p>
           </div>
-          <div class="card-footer d-flex justify-content-between align-items-center">
-            <span class="fw-bold text-primary">USD ${product.cost}</span>
+          <div class="card-footer">
+            <span class="cost">USD ${product.cost}</span>
             <small class="text-muted">${product.soldCount} vendidos</small>
           </div>
         </div>

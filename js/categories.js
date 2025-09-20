@@ -1,3 +1,4 @@
+let currentSearchTerm = '';
 const ORDER_ASC_BY_NAME = "AZ";
 const ORDER_DESC_BY_NAME = "ZA";
 const ORDER_BY_PROD_COUNT = "Cant.";
@@ -41,7 +42,6 @@ function setCatID(id) {
 }
 
 function showCategoriesList(){
-
     let htmlContentToAppend = "";
     for(let i = 0; i < currentCategoriesArray.length; i++){
         let category = currentCategoriesArray[i];
@@ -141,3 +141,79 @@ document.addEventListener("DOMContentLoaded", function(e){
         showCategoriesList();
     });
 });
+
+// BUSCADOR //
+
+function highlightSearchTerm(text, searchTerm) {
+    if (!searchTerm.trim()) return text;
+    
+    const escapedTerm = searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(${escapedTerm})`, 'gi');
+    return text.replace(regex, '<span class="search-highlight">$1</span>');
+}
+function searchCategories(categories, searchTerm) {
+    if (!searchTerm.trim()) {
+        return categories;
+    }
+    
+    const term = searchTerm.toLowerCase();
+    return categories.filter(category => 
+        category.name.toLowerCase().includes(term) || 
+        category.description.toLowerCase().includes(term)
+    );
+}
+
+function showCategoriesList(){
+    let searchFilteredArray = searchCategories(currentCategoriesArray, currentSearchTerm);
+    
+    let htmlContentToAppend = "";
+    for(let i = 0; i < searchFilteredArray.length; i++){
+        let category = searchFilteredArray[i];
+
+        if (((minCount == undefined) || (minCount != undefined && parseInt(category.productCount) >= minCount)) &&
+            ((maxCount == undefined) || (maxCount != undefined && parseInt(category.productCount) <= maxCount))){
+
+            // Aplicar resaltado al nombre y descripción
+            const highlightedName = highlightSearchTerm(category.name, currentSearchTerm);
+            const highlightedDescription = highlightSearchTerm(category.description, currentSearchTerm);
+
+            htmlContentToAppend += `
+            <div onclick="setCatID(${category.id})" class="list-group-item list-group-item-action cursor-active">
+                <div class="row">
+                    <div class="col-3">
+                        <img src="${category.imgSrc}" alt="${category.description}" class="img-thumbnail">
+                    </div>
+                    <div class="col">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 class="mb-1">${highlightedName}</h4>
+                            <small class="text-muted">${category.productCount} artículos</small>
+                        </div>
+                        <p class="mb-1">${highlightedDescription}</p>
+                    </div>
+                </div>
+            </div>
+            `
+        }
+    }
+    document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
+}
+
+document.getElementById("searchInput").addEventListener("input", function(){
+    currentSearchTerm = document.getElementById("searchInput").value;
+    showCategoriesList();
+});
+
+
+document.getElementById("clearRangeFilter").addEventListener("click", function(){
+    document.getElementById("rangeFilterCountMin").value = "";
+    document.getElementById("rangeFilterCountMax").value = "";
+    document.getElementById("searchInput").value = ""; 
+
+    minCount = undefined;
+    maxCount = undefined;
+    currentSearchTerm = ''; 
+
+    showCategoriesList();
+});
+
+// FIN BUSCADOR //
