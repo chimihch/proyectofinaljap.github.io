@@ -36,14 +36,14 @@ function showProducts(products) {
   container.innerHTML = "";
 
   if (products.length === 0) {
-    container.innerHTML = `<p class="text-muted">No hay productos que coincidan con el filtro.</p>`;
+    container.innerHTML = `<p class="text-muted">No hay productos que coincidan con el fil  tro.</p>`;
     return;
   }
 
   products.forEach(product => {
     container.innerHTML += `
       <div class="col-md-4">
-        <div class="card" data-id="${product.id}">
+        <div class="ver-producto"  data-id="${product.id}">
           <img src="${product.image}" class="card-img-top" alt="${product.name}">
           <div class="card-body">
             <h5 class="card-title">${product.name}</h5>
