@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Autos - OranGo Market</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>eMercado - Todo lo que busques está aquí</title>
 
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
   <link rel="stylesheet" href="css/prototipo2.css">
 </head>
 <body>
    <header class="navbar">
     <div class="logo">
         <img src="workspace-de-0/logo-orango.png" alt="OranGo-Market">
-    OranGo-Market
-</div>
+        OranGo-Market
+    </div>
     <nav class="menu">
       <ul id="menuUL">
       <li><a href="index.html">Inicio</a></li>
@@ -28,12 +29,13 @@
       </ul>
     </nav>
   </header>
-  <section class="hero">
+
+  <section class="hero"> <!--busqueda por nombre-->
     <div class="hero-text">
       <h1>Encuentra lo que buscas al mejor precio</h1>
       <form class="search-box">
-        <input type="text" placeholder="¿Qué estás buscando?">
-        <button type="submit">🔍</button>
+        <input type="search" id="searchInput" placeholder="¿Qué estás buscando?" autocomplete="off">
+        <button type="button">🔍</button>
       </form>
     </div>
     <div class="hero-img">
@@ -44,6 +46,26 @@
   <main class="pb-5 container">
     <div class="container mt-4">
       <h2 class="mb-4" id="category-title"></h2>
+
+      <!-- Controles de filtro y orden -->
+      <div class="mb-3 d-flex flex-wrap gap-2 align-items-center">
+        <label for="sort" class="form-label mb-0 me-2">Ordenar por:</label>
+        <select id="sort" class="form-select w-auto">
+          <option value="price-asc">Precio (menor a mayor)</option>
+          <option value="price-desc">Precio (mayor a menor)</option>
+          <option value="relevance-desc">Relevancia (más vendidos)</option>
+        </select>
+
+        <label class="ms-3 mb-0">Precio mínimo:</label>
+        <input type="number" id="minPrice" class="form-control w-auto" placeholder="Min">
+
+        <label class="ms-2 mb-0">Precio máximo:</label>
+        <input type="number" id="maxPrice" class="form-control w-auto" placeholder="Max">
+
+        <button id="filterBtn" class="btn btn-primary ms-2">Filtrar</button>
+        <button id="clearFilterBtn" class="btn btn-secondary ms-2">Limpiar</button>
+      </div>
+
       <div id="products-container" class="row g-3">
         <!-- se muestran los productos -->
       </div>
@@ -60,6 +82,7 @@
       }
     });
   </script>
+
   <script src="js/products.js"></script>
   <script src="js/init.js"></script>
 </body>
