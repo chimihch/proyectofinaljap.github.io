@@ -89,3 +89,42 @@ if (!localStorage.getItem('sesionIniciada')) {
         alert("Por favor, inicia sesión.");
          window.location.href = "login.html";
     }
+
+function fetchCommentedProducts() {
+  const productId = localStorage.getItem("selectedProductId");
+  const url = `https://japceibal.github.io/emercado-api/products_comments/${productId}.json`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(comments => {
+      showCommentedProducts(comments);
+    })
+    .catch(error => {
+      console.error("Error al cargar los comentarios:", error);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  fetchCommentedProducts();
+});
+
+function showCommentedProducts(comments) {
+  const container = document.getElementById("review-section");
+  container.innerHTML = `
+  <div class="card shadow-lg border-0 p-4">
+    <h4 class="mb-3">Reseñas</h4>
+    ${comments.length === 0 ? '<p class="text-muted">No hay reseñas para este producto.</p>' : ''}
+    <div class="list-group">
+      ${comments.map(comment => `
+        <div class="list-group-item">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">${comment.user}</h5>
+            <small class="text-muted">${comment.dateTime}</small>
+          </div>
+          <p class="mb-1">${comment.description}</p>
+        </div>
+      `).join('')}
+    </div>
+  </div>
+  `;
+};
