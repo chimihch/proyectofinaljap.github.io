@@ -173,6 +173,14 @@ small {
   color: #ff6600;
   margin-top: 10px;
 }
+/*PRODUCTOS RELACIONADOS PRODUCT-INFO*/
+.col {
+  height: 120px;
+  overflow: hidden;
+  background-color: #fff;
+  color: #000;
+}
+
 
 @media (max-width: 768px) {
   .products {
@@ -219,3 +227,4 @@ small {
   }
 
 }
+
