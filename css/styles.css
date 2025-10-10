@@ -1,3 +1,7 @@
+body {
+  background-color: #fff4ee;
+}
+
 header {
   background-color: #ff6600;
   display: flex;
@@ -248,4 +252,17 @@ a.custom-card:hover {
     border: none !important;
     border-width:0!important;
 
+}
+
+#review-section .card {
+  height: 100%;
+  max-height: 400px; /* Adjust as needed to match product-info card */
+  display: flex;
+  flex-direction: column;
+}
+
+#review-section .list-group {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  max-height: 400px;
 }

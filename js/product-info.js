@@ -74,12 +74,6 @@ function showProductInfo(product) {
         </div>
       </div>
     </div>
-
-    <!-- Sección productos relacionados -->
-    <div class="mt-5">
-      <h4 class="text-light mb-3">Productos relacionados</h4>
-      <div id="relatedProducts" class="row row-cols-1 row-cols-md-3 g-3"></div>
-    </div>
   `;
 
   // Miniaturas controlando el carrusel
@@ -160,3 +154,15 @@ function showCommentedProducts(comments) {
     </div>
   `;
 }
+
+// 🔹 Sincronizar alturas de tarjetas
+document.addEventListener("DOMContentLoaded", () => {
+  function syncReviewHeight() {
+    const productInfoCard = document.querySelector("#product-info .card");
+    const reviewCard = document.querySelector("#review-section .card");
+    if (productInfoCard && reviewCard) {
+      reviewCard.style.maxHeight = productInfoCard.offsetHeight + "px";
+    }
+  };
+   setTimeout(syncReviewHeight, 100);
+});

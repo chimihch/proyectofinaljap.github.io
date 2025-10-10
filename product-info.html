@@ -31,13 +31,20 @@
       </ul>
     </nav>
   </header>
-  <main>
-  <div class="container my-5">
+  <main class="container">
+    <div class="row">
+  <div class="container mt-5 mb-1 col-lg-8 col-md-12 d-flex flex-column">
     <div id="product-info" class="mb-5"></div>
   </div>
-  <div class="container mb-5">
+  <div class="container mb-5 mt-1 mt-lg-5 col-lg-4 col-md-12 d-flex flex-column">
     <div id="review-section" class="mb-4"></div>
+    <div id="add-review" class="mt-4"></div>
   </div>
+</div>
+    <section class="container">
+  <h3 class="text mb-3">Productos relacionados</h3>
+  <div id="relatedProducts" class="row row-cols-1 row-cols-md-3 justify-content-center"></div>
+</section>
   </main>
   <footer class="text-muted">
     <div class="container">
@@ -55,10 +62,6 @@
       <div></div>
     </div>
   </div>
-  <section class="container mt-5">
-  <h3 class="text-light mb-3">Productos relacionados</h3>
-  <div id="relatedProducts" class="row row-cols-1 row-cols-md-3"></div>
-</section>
 
   </body>
     <script>
