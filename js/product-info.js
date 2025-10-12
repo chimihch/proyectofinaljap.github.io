@@ -155,14 +155,59 @@ function showCommentedProducts(comments) {
   `;
 }
 
-// 🔹 Sincronizar alturas de tarjetas
+// Agregar nueva reseña (comentario)
 document.addEventListener("DOMContentLoaded", () => {
-  function syncReviewHeight() {
-    const productInfoCard = document.querySelector("#product-info .card");
-    const reviewCard = document.querySelector("#review-section .card");
-    if (productInfoCard && reviewCard) {
-      reviewCard.style.maxHeight = productInfoCard.offsetHeight + "px";
+  const commentBtn = document.querySelector(".rating-btn");
+  const commentText = document.querySelector(".rating-comment");
+  const ratingInputs = document.getElementsByName("rating");
+
+  commentBtn.addEventListener("click", () => {
+    const text = commentText.value.trim();
+    const selectedRating = Array.from(ratingInputs).find(r => r.checked)?.value;
+
+    if (!text || !selectedRating) {
+      alert("Por favor, escribe un comentario y selecciona una calificación.");
+      return;
     }
-  };
-   setTimeout(syncReviewHeight, 100);
+
+    const userName = localStorage.getItem("userName") || "Usuario Anónimo";
+    const date = new Date().toLocaleString();
+
+    const newCommentHTML = `
+      <div class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">${userName}</h5>
+          <small class="text-muted">${date}</small>
+        </div>
+        <p class="mb-1">${text}</p>
+        <div>${'⭐'.repeat(selectedRating)}</div>
+      </div>
+    `;
+
+    // Buscar el div de la lista dentro del contenedor de reseñas
+    const listGroup = document.querySelector("#review-section .list-group");
+
+    if (listGroup) {
+      // Inserta dentro de la caja de reseñas (no afuera)
+      listGroup.insertAdjacentHTML("beforeend", newCommentHTML);
+    } else {
+      // Si aún no hay reseñas, crea la estructura entera dentro del div
+      const reviewSection = document.getElementById("review-section");
+      reviewSection.innerHTML = `
+        <div class="card shadow-lg border-0 p-4">
+          <h4 class="mb-3">Reseñas</h4>
+          <div class="list-group">
+            ${newCommentHTML}
+          </div>
+        </div>
+      `;
+    }
+
+    // Limpiar el formulario
+    commentText.value = "";
+    ratingInputs.forEach(r => (r.checked = false));
+
+    alert("¡Tu reseña se agregó correctamente!");
+  });
 });
+
