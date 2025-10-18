@@ -322,3 +322,59 @@ a.custom-card:hover {
   background-color: #e25500;
 }
 
+/* === MODO OSCURO === */
+.dark-mode {
+  background-color: #121212 !important;
+  color: #f5f5f5 !important;
+}
+
+.dark-mode .card {
+  background-color: #1e1e1e !important;
+  color: #f5f5f5 !important;
+}
+
+.dark-mode .list-group-item {
+  background-color: #2c2c2c !important;
+  color: #fff !important;
+}
+
+.dark-mode .navbar,
+.dark-mode .footer {
+  background-color: #000 !important;
+  
+}
+.dark-mode .menu a {
+  color:#f5f5f5 !important;
+}
+.dark-mode .btn-outline-light {
+  border-color: #f5f5f5 !important;
+  color: #f5f5f5 !important;
+}
+
+.dark-mode .btn-outline-light:hover {
+  background-color: #f5f5f5 !important;
+  color: #121212 !important;
+} 
+.dark-mode textarea  {
+  background-color: #121212 !important;
+  color: #f5f5f5 !important;
+  border: 1px solid #555 !important;
+}
+.dark-mode .rating-box {
+  background-color: #2c2c2c !important;
+  color: #f5f5f5 !important;
+  border-left: 2px solid #555 !important;
+
+} .dark-mode .album {
+  background-color: #121212 !important;
+}
+
+.dark-mode .btn-light {
+  background-color: #ff6600 !important;
+  color: white !important;
+  border: none !important;
+}
+
+.dark-mode h1, .dark-mode h2{
+  color: #f5f5f5 !important;
+}

@@ -11,22 +11,24 @@
   <link href="css/styles.css" rel="stylesheet">
 </head>
 
-<body>
+<body id="body">
    <header class="navbar">
     <div class="logo">
         <img src="workspace-de-0/logo-orango.png" alt="OranGo-Market">
-    OranGo-Market
+        <h1>OranGo-Market</h1>
 </div>
     <nav class="menu">
-      <ul id="menuUL">
+      <ul id="menus">
       <li><a href="index.html">Inicio</a></li>
       <li><a href="categories.html">Categorías</a></li>
       <li><a href="sell.html">Vender</a></li>
       <li><a href="contacto.html">Contacto</a></li>
       <li><a href="#">👤 <span id="user-name"></span></a></li>
       <li><a href="carrito.html" class="cart"><img src="workspace-de-0/basket-cart-icon-27.png" alt="Carrito"></a></li>
+      <button id="darkModeToggle" class="btn btn-outline-light ms-auto">🌙 Modo oscuro</button>
 
       </ul>
+      
     </nav>
   </header>
 
@@ -85,6 +87,7 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/index.js"></script>
   <script src="js/init.js"></script>
+  <script src="js/darkmode.js"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -96,6 +99,7 @@
       }
     });
   </script>
+
 </body>
 
 </html>
