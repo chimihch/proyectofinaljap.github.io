@@ -243,12 +243,21 @@ a.custom-card:hover {
 
 }
 
-.btn btn-lg btn-success w-100 {
+.btn, .btn-lg, .btn-success {
     background-color: #FF7323 !important;
     border: none !important;
     border-width:0!important;
 
 }
+
+.btn-primary-custom {
+            background: #FF7323;
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
 
 
 
@@ -375,6 +384,18 @@ a.custom-card:hover {
   border: none !important;
 }
 
-.dark-mode h1, .dark-mode h2{
+.dark-mode h1, .dark-mode h2, .dark-mode p {
   color: #f5f5f5 !important;
 }
+
+.profile-image img {
+  width: 150px;
+   height: 150px; 
+   border-radius: 50%; 
+   object-fit: cover; 
+   border: 2px solid #FF7323;
+  }
+
+  .text-success {
+    color: #FF7323 !important;
+  }
