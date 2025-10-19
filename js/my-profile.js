@@ -82,3 +82,80 @@ function updateHeaderName(profile) {
   const name = ((profile.firstName || "") + " " + (profile.lastName || "")).trim();
   span.textContent = name || profile.email || "Usuario";
 }
+
+/* DESAFIATE */
+
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("profileForm");
+  const nombreInput = document.getElementById("Nombre");
+  const apellidoInput = document.getElementById("Apellido");
+  const mailInput = document.getElementById("mail");
+  const telefonoInput = document.getElementById("Telefono");
+  const imageInput = document.getElementById("imageInput");
+  const profileImage = document.getElementById("profileImage");
+  const saveFeedback = document.getElementById("saveFeedback");
+
+  const PROFILE_KEY = "userProfileData";
+
+  // --- Cargar datos guardados ---
+  const savedProfile = JSON.parse(localStorage.getItem(PROFILE_KEY)) || {};
+
+  if (savedProfile.Nombre) nombreInput.value = savedProfile.Nombre;
+  if (savedProfile.Apellido) apellidoInput.value = savedProfile.Apellido;
+  if (savedProfile.Email) mailInput.value = savedProfile.Email;
+  if (savedProfile.Telefono) telefonoInput.value = savedProfile.Telefono;
+  if (savedProfile.Foto) profileImage.src = savedProfile.Foto;
+
+  // Si no hay email guardado, intentar precargar desde otros datos del usuario
+  if (!mailInput.value) {
+    const possibleEmails = [
+      "loggedInUserEmail",
+      "currentUserEmail",
+      "userEmail",
+      "email",
+    ];
+    for (let key of possibleEmails) {
+      const stored = localStorage.getItem(key);
+      if (stored && stored.includes("@")) {
+        mailInput.value = stored;
+        break;
+      }
+    }
+  }
+
+  // --- Guardar imagen seleccionada ---
+  imageInput.addEventListener("change", function (e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const dataURL = event.target.result;
+      profileImage.src = dataURL;
+
+      // Guardar imagen en localStorage
+      const currentData = JSON.parse(localStorage.getItem(PROFILE_KEY)) || {};
+      currentData.Foto = dataURL;
+      localStorage.setItem(PROFILE_KEY, JSON.stringify(currentData));
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // --- Guardar formulario ---
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const profileData = {
+      Nombre: nombreInput.value.trim(),
+      Apellido: apellidoInput.value.trim(),
+      Email: mailInput.value.trim(),
+      Telefono: telefonoInput.value.trim(),
+      Foto: profileImage.src || "",
+    };
+
+    localStorage.setItem(PROFILE_KEY, JSON.stringify(profileData));
+
+    saveFeedback.textContent = "✅ Cambios guardados correctamente";
+    setTimeout(() => (saveFeedback.textContent = ""), 2000);
+  });
+});
