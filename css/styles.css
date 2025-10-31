@@ -388,6 +388,9 @@ a.custom-card:hover {
   color: #f5f5f5 !important;
 }
 
+.dark-mode .section.hero {
+  background-color: #1e1e1e !important;
+}
 .profile-image img {
   width: 150px;
    height: 150px; 
@@ -399,3 +402,4 @@ a.custom-card:hover {
   .text-success {
     color: #FF7323 !important;
   }
+

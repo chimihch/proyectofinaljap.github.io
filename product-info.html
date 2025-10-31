@@ -26,7 +26,7 @@
         <li><a href="sell.html">Vender</a></li>
         <li><a href="contacto.html">Contacto</a></li>
         <li><a href="my-profile.html">👤 <span id="user-name"></span></a></li>
-        <li><a href="carrito.html" class="cart"><img src="workspace-de-0/basket-cart-icon-27.png" alt="Carrito"></a></li>
+        <li><a href="cart.html" class="cart"><img src="workspace-de-0/basket-cart-icon-27.png" alt="Carrito"></a></li>
         <li><button id="darkModeToggle" class="btn btn-outline-light ms-auto">🌙 Modo oscuro</button></li>
       </ul>
     </nav>
@@ -40,6 +40,25 @@
       <div class="col-lg-8 mb-4">
         <div id="product-info"></div>
       </div>
+      <button id="buyBtn" class="btn btn-success mt-3">Comprar</button>
+
+<script>
+  const buyBtn = document.getElementById("buyBtn");
+
+  buyBtn.addEventListener("click", () => {
+    const product = {
+      name: "Cámara Nikon D3500",
+      cost: 450,
+      currency: "USD",
+      count: 1,
+      image: "https://via.placeholder.com/150"
+    };
+
+    localStorage.setItem("product", JSON.stringify(product));
+    window.location.href = "cart.html";
+  });
+</script>
+
 
       <!-- Columna derecha: solo calificación -->
       <div class="col-lg-4">
