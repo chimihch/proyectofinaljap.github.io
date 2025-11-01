@@ -17,7 +17,7 @@
   <header class="navbar">
     <div class="logo">
       <img src="workspace-de-0/logo-orango.png" alt="OranGo-Market">
-      <h1>OranGo-Market</h1>
+      OranGo-Market
     </div>
     <nav class="menu">
       <ul id="menuUL">
@@ -40,9 +40,8 @@
       <div class="col-lg-8 mb-4">
         <div id="product-info"></div>
       </div>
-      <button id="buyBtn" class="btn btn-success mt-3">Comprar</button>
 
-<script>
+  <script>
   const buyBtn = document.getElementById("buyBtn");
 
   buyBtn.addEventListener("click", () => {
@@ -57,7 +56,7 @@
     localStorage.setItem("product", JSON.stringify(product));
     window.location.href = "cart.html";
   });
-</script>
+</script>   <!-- ¿? -->
 
 
       <!-- Columna derecha: solo calificación -->
@@ -88,7 +87,7 @@
     </div>
 
     <!-- Reseñas debajo del producto -->
-    <div class="mt-5">
+    <div class="mt-4 mt-lg-0">
       <div id="review-section"></div>
     </div>
 

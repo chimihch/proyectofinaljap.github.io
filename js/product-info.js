@@ -32,7 +32,7 @@ function showProductInfo(product) {
   const container = document.getElementById("product-info");
 
   container.innerHTML = `
-    <div class="card shadow-lg border-0">
+    <div class="card shadow border-0">
       <div class="row g-0">
         <!-- Carrusel -->
         <div class="col-md-6">
@@ -68,8 +68,9 @@ function showProductInfo(product) {
           <p><strong>Vendidos:</strong> ${product.soldCount}</p>
           <p class="fs-4 fw-bold" style="color:#ff6600;">USD ${product.cost}</p>
 
-          <div class="mt-auto">
-            <button class="btn w-100" style="background-color:#ff6600;">🛒 Agregar al carrito</button>
+          <div class="mt-auto d-flex justify-content-end gap-3">
+            <button id="add-btn" class="btn w-40"> + 🛒</button>
+            <button id="buy-btn" class="btn w-40">Comprar</button>
           </div>
         </div>
       </div>
@@ -83,8 +84,48 @@ function showProductInfo(product) {
       carousel.to(i);
     });
   });
-}
 
+    const addBtn = document.getElementById('add-btn');
+    const buyBtn = document.getElementById('buy-btn');
+
+const add2Cart = () => {
+    const CART_KEY = 'cart';
+    const stored = localStorage.getItem(CART_KEY);
+    const cart = stored ? JSON.parse(stored) : [];
+
+    const existing = cart.find(item => item.id === product.id);
+    if (existing) {
+      existing.count = (existing.count || 1) + 1;
+    } else {
+      cart.push({
+        id: product.id,
+        name: product.name,
+        cost: product.cost,
+        currency: product.currency,
+        image: product.images && product.images[0] ? product.images[0] : '',
+        count: 1
+      });
+    }
+
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  };
+
+  //agregar al carrito
+  if (addBtn) {
+    addBtn.addEventListener('click', () => {
+      add2Cart();
+      alert('Producto agregado al carrito');
+    });
+  }
+
+  //comprar
+  if (buyBtn) {
+    buyBtn.addEventListener('click', () => {
+      add2Cart();
+      window.location.href = 'cart.html';
+    });
+  }
+}
 
 // Productos relacionados
 function showRelatedProducts(relatedProducts) {
@@ -136,7 +177,7 @@ function showCommentedProducts(comments) {
   const container = document.getElementById("review-section");
 
   container.innerHTML = `
-    <div class="card shadow-lg border-0 p-4">
+    <div class="card shadow border-0 p-4">
       <h4 class="mb-3">Reseñas</h4>
       ${comments.length === 0 ? '<p class="text-muted">No hay reseñas para este producto.</p>' : ''}
       <div class="list-group">
