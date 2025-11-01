@@ -2,18 +2,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const cartContainer = document.getElementById("cart-container");
   const cartItems = JSON.parse(localStorage.getItem("cart"));
 
-  // Si no hay producto en el localStorage
   if (!cartItems || cartItems.length === 0) {
     cartContainer.innerHTML = `
-  <div class="d-flex justify-content-center align-items-center" style="height: 60vh;">
-    <div class="alert alert-warning text-center w-50" role="alert">
-      No hay ningún producto en el carrito.
-    </div>
-  </div>`;
+      <div class="d-flex justify-content-center align-items-center" style="height: 60vh;">
+        <div class="alert alert-warning text-center w-50" role="alert">
+          No hay ningún producto en el carrito.
+        </div>
+      </div>`;
     return;
   }
 
-  // Mostrar productos en el carrito 
+  // Mostrar productos
   cartContainer.innerHTML = cartItems.map((product, idx) => {
     const pid = product.id ?? `idx-${idx}`;
     const qty = product.count || 1;
@@ -22,24 +21,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const imgSrc = product.image || (product.images && product.images[0]) || "";
 
     return `
-      <div class="col-md-7" data-id="${pid}">
-        <div class="card shadow p-3 mb-3 border-0">
-          <div class="row g-0 align-items-center">
-            <div class="col-md-4 mx-2">
-              <img src="${imgSrc}" class="img-fluid rounded" alt="${product.name}">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">${product.name}</h5>
-                <p class="card-text mb-1">Costo: <strong>${currency}${Number(product.cost).toFixed(2)}</strong></p>
-                <div class="d-flex align-items-center mb-2">
-                  <label class="me-2">Cantidad:</label>
-                  <input type="number" id="quantity-${pid}" data-id="${pid}" class="form-control w-25 quantity-input" value="${qty}" min="1">
-                </div>
-                <p class="card-text">Subtotal:
-                  <strong id="subtotal-${pid}" class="subtotal">${currency}${subtotal.toFixed(2)}</strong>
-                </p>
+      <div class="card shadow p-3 mb-3 border-0">
+        <div class="row g-0 align-items-center">
+          <div class="col-md-4">
+            <img src="${imgSrc}" class="img-fluid rounded" alt="${product.name}">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">${product.name}</h5>
+              <p class="card-text mb-1">Costo: <strong>${currency}${Number(product.cost).toFixed(2)}</strong></p>
+              <div class="d-flex align-items-center mb-2">
+                <label class="me-2">Cantidad:</label>
+                <input type="number" id="quantity-${pid}" data-id="${pid}" class="form-control w-25 quantity-input" value="${qty}" min="1">
               </div>
+              <p class="card-text">Subtotal:
+                <strong id="subtotal-${pid}" class="subtotal">${currency}${subtotal.toFixed(2)}</strong>
+              </p>
             </div>
           </div>
         </div>
@@ -47,7 +44,19 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }).join("");
 
-  //listeners a cada input para actualizar subtotal en tiempo real
+  // Función para actualizar total
+  function updateTotal() {
+    const subtotals = document.querySelectorAll('[id^="subtotal-"]');
+    let total = 0;
+    subtotals.forEach(sub => {
+      const text = sub.textContent.replace(/[^\d.-]/g, "");
+      total += parseFloat(text) || 0;
+    });
+    const totalEl = document.getElementById("total");
+    if (totalEl) totalEl.textContent = `USD ${total.toFixed(2)}`;
+  }
+
+  // Listeners para inputs
   cartItems.forEach(product => {
     const pid = product.id ?? `idx-${cartItems.indexOf(product)}`;
     const qtyInput = document.getElementById(`quantity-${pid}`);
@@ -63,13 +72,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const currency = product.currency ? `${product.currency} ` : "";
       subtotalEl.textContent = `${currency}${newSubtotal.toFixed(2)}`;
 
-      // actualizar cantidad en localStorage
       const stored = JSON.parse(localStorage.getItem("cart")) || [];
       const idx = stored.findIndex(item => (item.id ?? null) === (product.id ?? null));
       if (idx > -1) {
         stored[idx].count = quantity;
         localStorage.setItem("cart", JSON.stringify(stored));
       }
+
+      updateTotal();
     });
   });
+
+  // Calcular total al cargar
+  updateTotal();
 });

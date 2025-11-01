@@ -403,3 +403,9 @@ a.custom-card:hover {
     color: #FF7323 !important;
   }
 
+  .card.sticky-top {
+  max-width: 300px;
+}
+
+
+

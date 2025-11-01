@@ -2,71 +2,108 @@
 <html lang="es">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-    <script src="js/darkmode.js"></script>
+  <script src="js/darkmode.js"></script>
+
+  <style>
+    /* Contenedor padre del carrito y total */
+    .cart-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* Productos ocupan más espacio */
+    #cart-products {
+      flex: 1 1 60%;
+    }
+
+    /* Total a la derecha, sticky, más grande */
+    #cart-total {
+      flex: 0 0 35%;
+      max-width: 400px;
+    }
+
+    #cart-total .sticky-top {
+      top: 80px; /* altura del header */
+    }
+
+    /* Cards de productos mantienen su tamaño */
+    #cart-container .card {
+      width: 100%;
+    }
+  </style>
 </head>
-  
+
 <body>
   <header class="navbar">
     <div class="logo">
-        <img src="workspace-de-0/logo-orango.png" alt="OranGo-Market">
-    OranGo-Market
-</div>
+      <img src="workspace-de-0/logo-orango.png" alt="OranGo-Market">
+      OranGo-Market
+    </div>
     <nav class="menu">
       <ul id="menuUL">
-      <li><a href="index.html">Inicio</a></li>
-      <li><a href="categories.html">Categorías</a></li>
-      <li><a href="sell.html">Vender</a></li>
-      <li><a href="contacto.html">Contacto</a></li>
-      <li><a href="my-profile.html">👤 <span id="user-name"></span></a></li>
-      <li><a href="cart.html" class="cart"><img src="workspace-de-0/basket-cart-icon-27.png" alt="Carrito"></a></li>
-
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="categories.html">Categorías</a></li>
+        <li><a href="sell.html">Vender</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="my-profile.html">👤 <span id="user-name"></span></a></li>
+        <li><a href="cart.html" class="cart"><img src="workspace-de-0/basket-cart-icon-27.png" alt="Carrito"></a></li>
       </ul>
     </nav>
   </header>
+
   <main>
-      <div class="container my-5">
-    <h2 class="text-center mb-4">🛒 Carrito de Compras</h2>
-    <div id="cart-container" class="row justify-content-center"></div>
-  </div>
+    <div class="container my-5">
+      <h2 class="text-center mb-4">🛒 Carrito de Compras</h2>
+
+      <!-- Contenedor padre: productos a la izquierda, total a la derecha -->
+      <div class="cart-row">
+        <!-- Productos -->
+        <div id="cart-products">
+          <div id="cart-container"></div>
+        </div>
+
+        <!-- Total general -->
+        <div id="cart-total">
+          <div class="card shadow-sm p-4 sticky-top">
+            <h4>Total general</h4>
+            <p class="fs-4"><strong id="total">USD 0.00</strong></p>
+          </div>
+        </div>
       </div>
     </div>
   </main>
+
   <footer class="text-muted">
     <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
+      <p class="float-end"><a href="#">Volver arriba</a></p>
       <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
     </div>
   </footer>
+
   <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
   </div>
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/cart.js"></script>
-</body>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const userName = localStorage.getItem('userName');
       const userNameSpan = document.getElementById('user-name');
-
       if (userName && userNameSpan) {
         userNameSpan.textContent = userName;
       }
     });
   </script>
-  
+</body>
 </html>
