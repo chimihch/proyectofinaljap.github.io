@@ -407,5 +407,8 @@ a.custom-card:hover {
   max-width: 300px;
 }
 
+.badge-primary {
+    background-color: #FF7323 !important;
+}
 
 

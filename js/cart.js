@@ -54,6 +54,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     const totalEl = document.getElementById("total");
     if (totalEl) totalEl.textContent = `USD ${total.toFixed(2)}`;
+
+    //badge
+      const totalProductsB = document.getElementById("total-products");
+      const stored = JSON.parse(localStorage.getItem("cart")) || [];
+      const totalItems = stored.reduce((acc, item) => acc + (Number(item.count) || 0), 0);
+      totalProductsB.textContent = totalItems > 0 ? `${totalItems}` : '';
   }
 
   // Listeners para inputs
@@ -80,9 +86,12 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       updateTotal();
+
     });
   });
 
   // Calcular total al cargar
   updateTotal();
+
 });
+
