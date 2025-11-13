@@ -57,9 +57,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //badge
       const totalProductsB = document.getElementById("total-products");
+      const totalProductsB2 = document.getElementById("total-products2");
       const stored = JSON.parse(localStorage.getItem("cart")) || [];
       const totalItems = stored.reduce((acc, item) => acc + (Number(item.count) || 0), 0);
       totalProductsB.textContent = totalItems > 0 ? `${totalItems}` : '';
+      totalProductsB2.textContent = totalItems > 0 ? `${totalItems}` : '';
   }
 
   // Listeners para inputs

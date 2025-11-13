@@ -1,11 +1,9 @@
-header {
-  background-color: #ff6600;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 30px;
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff4ee; 
 }
+
+
 
 header .logo {
   display: flex;
@@ -28,16 +26,15 @@ header .logo img {
 
 nav ul {
   list-style: none;
-  display: flex;
-  gap: 25px;
+  gap: 16px;
   margin: 15px 10px;
-  vertical-align: middle;
 }
 
 nav ul li a {
   text-decoration: none;
   color:#000; 
   font-weight: 600;
+  text-align: end;
 }
 
 nav ul li a:hover {
@@ -237,7 +234,7 @@ a.custom-card:hover {
 
 
 .navbar-light {
-    background-color: #FF7323 !important;
+    background-color: #ff6600 !important;
     border: none !important;
     border-width:0!important;
 
@@ -353,25 +350,25 @@ a.custom-card:hover {
   
 }
 .dark-mode .menu a {
-  color:#f5f5f5 !important;
+  color:#fff4ee !important;
 }
 .dark-mode .btn-outline-light {
-  border-color: #f5f5f5 !important;
-  color: #f5f5f5 !important;
+  border-color: #fff4ee !important;
+  color: #fff4ee !important;
 }
 
 .dark-mode .btn-outline-light:hover {
-  background-color: #f5f5f5 !important;
+  background-color: #fff4ee !important;
   color: #121212 !important;
 } 
 .dark-mode textarea  {
   background-color: #121212 !important;
-  color: #f5f5f5 !important;
+  color: #fff4ee !important;
   border: 1px solid #555 !important;
 }
 .dark-mode .rating-box {
   background-color: #2c2c2c !important;
-  color: #f5f5f5 !important;
+  color: #fff4ee !important;
   border-left: 2px solid #555 !important;
 
 } .dark-mode .album {
@@ -380,12 +377,12 @@ a.custom-card:hover {
 
 .dark-mode .btn-light {
   background-color: #ff6600 !important;
-  color: white !important;
+  color: #fff4ee !important;
   border: none !important;
 }
 
-.dark-mode h1, .dark-mode h2, .dark-mode p {
-  color: #f5f5f5 !important;
+.dark-mode h1, .dark-mode h2, .dark-mode p, .dark-mode a, .dark-mode span{
+  color: #fff4ee !important;
 }
 
 .dark-mode .section.hero {
@@ -411,4 +408,15 @@ a.custom-card:hover {
     background-color: #FF7323 !important;
 }
 
+.navbar {
+  background-color: #ff6600;
+  padding: 10px 30px;
+}
 
+#darkModeToggle {
+  width: 148px;
+}
+
+.btn-sm {
+  background-color: #ff9457 !important;
+}
