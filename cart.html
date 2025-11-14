@@ -90,27 +90,55 @@
           <div id="cart-container"></div>
         </div>
 
-        <!-- Total general -->
-        <div id="cart-total">
-          <div class="card shadow-sm p-4 sticky-top">
-            <h4>Total general<span class="badge badge-primary ms-2" id="total-products2"></span></h4>
-            <p class="fs-4"><strong id="total">USD 0.00</strong></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
+      <div id="cart-total">
+  <div class="card shadow-sm p-4">
 
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end"><a href="#">Volver arriba</a></p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-    </div>
-  </footer>
+    <h4 class="mb-3">Resumen de compra <span class="badge ms-2" id="total-products2"></span></h4>
 
-  <div id="spinner-wrapper">
-    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+
+    <h5 class="mt-3">Tipo de envío</h5>
+    <div class="form-check">
+      <input type="radio" name="shipping" value="premium">
+      <label class="form-check-label" for="premium">Premium (15%)</label>
+    </div>
+    <div class="form-check">
+  <input type="radio" name="shipping" value="express">
+      <label class="form-check-label" for="express">Express (7%)</label>
+    </div>
+    <div class="form-check mb-3">
+      <input type="radio" name="shipping" value="standard">
+      <label class="form-check-label" for="standard">Standard (5%)</label>
+    </div>
+
+    <!-- Dirección -->
+    <h5 class="mt-4">Dirección de envío</h5>
+    <input type="text" class="form-control mb-2" id="departamento" placeholder="Departamento">
+    <input type="text" class="form-control mb-2" id="localidad" placeholder="Localidad">
+    <input type="text" class="form-control mb-2" id="calle" placeholder="Calle">
+    <input type="text" class="form-control mb-2" id="numero" placeholder="Número">
+    <input type="text" class="form-control mb-3" id="esquina" placeholder="Esquina">
+
+    <!-- Forma de pago -->
+    <h5>Forma de pago</h5>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="pago" id="tarjeta" value="tarjeta">
+      <label class="form-check-label" for="tarjeta">Tarjeta de crédito</label>
+    </div>
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="radio" name="pago" id="transferencia" value="transferencia">
+      <label class="form-check-label" for="transferencia">Transferencia bancaria</label>
+    </div>
+
+    <!-- Costos -->
+    <h5 class="mt-4">Costos</h5>
+    <p>Subtotal: <strong id="subtotal-general">USD 0.00</strong></p>
+    <p>Envío: <strong id="costo-envio">USD 0.00</strong></p>
+    <h4>Total: <strong id="total-final">USD 0.00</strong></h4>
+<button class="btn btn-success w-100 mt-3" id="btn-confirmar">Finalizar compra</button>
+
   </div>
+</div>
+
 
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
