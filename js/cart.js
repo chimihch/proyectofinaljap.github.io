@@ -183,51 +183,100 @@ document.addEventListener("DOMContentLoaded", () => {
     return ok;
   }
 
-  function validarPago() {
-    const tarjeta = document.getElementById("tarjeta") || document.getElementById("pago-tarjeta");
-    const transferencia = document.getElementById("transferencia") || document.getElementById("pago-transferencia");
+ function validarPago() {
+  const tarjeta = document.getElementById("pago-tarjeta");
+  const transferencia = document.getElementById("pago-transferencia");
 
-    const okTarjeta = tarjeta ? tarjeta.checked : false;
-    const okTransf = transferencia ? transferencia.checked : false;
+  const okTarjeta = tarjeta && tarjeta.checked;
+  const okTransf = transferencia && transferencia.checked;
 
-    const ok = okTarjeta || okTransf;
+  let okCamposExtra = true;
 
-    const alertPago = document.getElementById("alert-pago");
-    if (alertPago) alertPago.classList.toggle("d-none", ok);
+  // Si elige tarjeta: que sus campos no estén vacíos
+  if (okTarjeta) {
+    const num = document.getElementById("num-tarjeta")?.value.trim();
+    const vto = document.getElementById("vto-tarjeta")?.value.trim();
+    const cvv = document.getElementById("cvv-tarjeta")?.value.trim();
 
-    return ok;
+    okCamposExtra = num !== "" && vto !== "" && cvv !== "";
   }
+
+  // Si elige transferencia: que su campo no esté vacío
+  if (okTransf) {
+    const cuenta = document.getElementById("cuenta-transferencia")?.value.trim();
+    okCamposExtra = cuenta !== "";
+  }
+
+  const ok = (okTarjeta || okTransf) && okCamposExtra;
+
+  // Mostrar/ocultar alerta
+  const alertPago = document.getElementById("alert-pago");
+  if (alertPago) alertPago.classList.toggle("d-none", ok);
+
+  return ok;
+}
+
+  function validarEnvio() {
+  const envioSel = document.querySelector('input[name="shipping"]:checked');
+  const alertEnvio = document.getElementById("alert-envio");
+
+  const ok = !!envioSel;
+
+  if (alertEnvio) alertEnvio.classList.toggle("d-none", ok);
+
+  return ok;
+}
 
   /* ---------- Botón Finalizar compra: conexión segura y fallback ---------- */
-  function handleFinalizarCompra() {
-    const okDir = validarDireccion();
-    const okPago = validarPago();
+ function handleFinalizarCompra() {
+  const stored = JSON.parse(localStorage.getItem("cart")) || [];
 
-    if (!okDir || !okPago) {
-      // preferimos mostrar un modal bonito si Swal está presente
-      const title = "Faltan datos";
-      const text = "Por favor completa dirección y/o forma de pago antes de finalizar.";
-      if (window.Swal && typeof Swal.fire === 'function') {
-        Swal.fire({ icon: 'error', title, text });
-      } else {
-        alert(`${title}\n\n${text}`);
-      }
-      return;
-    }
-
-    // Éxito: procesar compra (aquí sólo simulamos)
+  //  SI EL CARRITO ESTÁ VACÍO, NO HAY COMPRA
+  if (stored.length === 0) {
     if (window.Swal && typeof Swal.fire === 'function') {
-      Swal.fire({ icon: 'success', title: 'Compra realizada', text: 'Tu pedido ha sido procesado.' });
+      Swal.fire({
+        icon: 'warning',
+        title: 'Carrito vacío',
+        text: 'Agregá productos antes de finalizar la compra.'
+      });
     } else {
-      alert('Compra realizada con éxito. Gracias.');
+      alert('El carrito está vacío. Agregá productos antes de comprar.');
     }
-
-    // opcional: limpiar carrito
-    localStorage.removeItem('cart');
-    // actualizar UI: vaciar productos y recalcular badges
-    renderCartItems([]);
-    actualizarTotalesFinales();
+    return;
   }
+
+  // VALIDACIONES NORMALES
+  const okDir = validarDireccion();
+  const okPago = validarPago();
+  const okEnvio = validarEnvio();
+
+  if (!okDir || !okPago || !okEnvio) {
+    const title = "Faltan datos";
+    const text = "Por favor completa dirección y/o forma de pago antes de finalizar.";
+    if (window.Swal && typeof Swal.fire === 'function') {
+      Swal.fire({ icon: 'error', title, text });
+    } else {
+      alert(`${title}\n\n${text}`);
+    }
+    return;
+  }
+
+  // ÉXITO
+  if (window.Swal && typeof Swal.fire === 'function') {
+    Swal.fire({
+      icon: 'success',
+      title: 'Compra realizada',
+      text: 'Tu pedido ha sido procesado.'
+    });
+  } else {
+    alert('Compra realizada con éxito. Gracias.');
+  }
+
+  // limpiar carrito
+  localStorage.removeItem('cart');
+  renderCartItems([]);
+  actualizarTotalesFinales();
+}
 
   // conectar el botón de confirmar (buscar por varios posibles ids para compatibilidad)
   function attachConfirmButton() {
@@ -243,4 +292,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- Debug: log inicial ---------- */
   console.log("cart.js cargado — productos:", storedCart.length);
+
+ // --- Mostrar/ocultar campos segun forma de pago ---
+const tarjetaRadio = document.getElementById("pago-tarjeta");
+const transfRadio = document.getElementById("pago-transferencia");
+
+const tarjetaFields = document.getElementById("tarjeta-fields");
+const transfFields = document.getElementById("transferencia-fields");
+
+function togglePaymentFields() {
+  if (tarjetaRadio?.checked) {
+    tarjetaFields.classList.remove("d-none");
+    transfFields.classList.add("d-none");
+  } else if (transfRadio?.checked) {
+    tarjetaFields.classList.add("d-none");
+    transfFields.classList.remove("d-none");
+  } else {
+    tarjetaFields.classList.add("d-none");
+    transfFields.classList.add("d-none");
+  }
+}
+
+if (tarjetaRadio) tarjetaRadio.addEventListener("change", togglePaymentFields);
+if (transfRadio) transfRadio.addEventListener("change", togglePaymentFields);
+ 
 });
