@@ -183,16 +183,22 @@ document.addEventListener("DOMContentLoaded", () => {
     return ok;
   }
 
- function validarPago() {
+function validarPago() {
   const tarjeta = document.getElementById("pago-tarjeta");
   const transferencia = document.getElementById("pago-transferencia");
 
   const okTarjeta = tarjeta && tarjeta.checked;
   const okTransf = transferencia && transferencia.checked;
 
+  // Si no hay ninguna forma de pago seleccionada: chau
+  if (!okTarjeta && !okTransf) {
+    mostrarAlerta(false);
+    return false;
+  }
+
   let okCamposExtra = true;
 
-  // Si elige tarjeta: que sus campos no estén vacíos
+  // Validación extra si paga con tarjeta
   if (okTarjeta) {
     const num = document.getElementById("num-tarjeta")?.value.trim();
     const vto = document.getElementById("vto-tarjeta")?.value.trim();
@@ -201,23 +207,26 @@ document.addEventListener("DOMContentLoaded", () => {
     okCamposExtra = num !== "" && vto !== "" && cvv !== "";
   }
 
-  // Si elige transferencia: que su campo no esté vacío
+  // Validación extra si paga por transferencia
   if (okTransf) {
     const cuenta = document.getElementById("cuenta-transferencia")?.value.trim();
     okCamposExtra = cuenta !== "";
   }
 
-  const ok = (okTarjeta || okTransf) && okCamposExtra;
-
-  // Mostrar/ocultar alerta
-  const alertPago = document.getElementById("alert-pago");
-  if (alertPago) alertPago.classList.toggle("d-none", ok);
-
+  const ok = okCamposExtra;
+  mostrarAlerta(ok);
   return ok;
 }
 
+function mostrarAlerta(ok) {
+  const alertPago = document.getElementById("alert-pago");
+  if (alertPago) alertPago.classList.toggle("d-none", ok);
+}
+
   function validarEnvio() {
-  const envioSel = document.querySelector('input[name="shipping"]:checked');
+  const envioSel = document.querySelector('input[name="shipping"]:checked')
+              || document.querySelector('input[name="envio"]:checked');
+
   const alertEnvio = document.getElementById("alert-envio");
 
   const ok = !!envioSel;
