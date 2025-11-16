@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
   const cartContainer = document.getElementById("cart-container");
-  const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+  let storedCart = JSON.parse(localStorage.getItem("cart")) || [];
 
   if (!storedCart || storedCart.length === 0) {
     if (cartContainer) {
@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- Renderizado de productos ---------- */
   function renderCartItems(cartItems) {
+    storedCart = Array.isArray(cartItems) ? cartItems.slice() : [];
     cartContainer.innerHTML = cartItems.map((product, idx) => {
       const pid = product.id ?? `idx-${idx}`;
       const qty = product.count || 1;
@@ -33,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const imgSrc = product.image || (product.images && product.images[0]) || "";
 
       return `
-        <div class="card shadow p-3 mb-3 border-0">
+        <div class="card shadow p-3 mb-3 border-0" data-pid="${pid}">
           <div class="row g-0 align-items-center">
             <div class="col-md-4">
               <img src="${imgSrc}" class="img-fluid rounded" alt="${product.name}">
@@ -49,15 +50,45 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p class="card-text">Subtotal:
                   <strong id="subtotal-${pid}" class="subtotal">${currency}${subtotal.toFixed(2)}</strong>
                 </p>
+                <button class="btn btn-outline-danger btn-sm deletep" data-pid="${pid}">
+                    <i class="fa fa-trash"></i> Eliminar
+                </button>
               </div>
             </div>
           </div>
         </div>
       `;
     }).join("");
+
+      quitarDelCarrito();
+      attachQuantityListeners();
   }
 
   renderCartItems(storedCart);
+
+function quitarDelCarrito() {
+  const deleteBtns = document.querySelectorAll('.deletep');
+  deleteBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const pid = String(btn.dataset.pid);
+
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const newCart = cart.filter((item, i) => {
+        const itemId = String(item.id ?? `idx-${i}`);
+        return itemId !== pid;
+      });
+
+      localStorage.setItem("cart", JSON.stringify(newCart));
+
+      const card = btn.closest('[data-pid]');
+      if (card) card.remove();
+
+      renderCartItems(newCart);
+      actualizarTotalesFinales();
+    });
+  });
+}
 
   /* ---------- Calcular subtotal de productos (suma de subtotales) ---------- */
   function calcularSubtotalProductos() {
