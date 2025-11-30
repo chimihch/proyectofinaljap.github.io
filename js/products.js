@@ -5,7 +5,7 @@ let filteredProducts = [];
 fetchProductsByCategory(catId);
 
 function fetchProductsByCategory(catId) {
-  const url = `https://japceibal.github.io/emercado-api/cats_products/${catId}.json`;
+  const url = `http://localhost:3000/products/${catId}`;
   fetch(url)
     .then(response => response.json())
     .then(data => {
