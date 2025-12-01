@@ -16,8 +16,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Fetch del producto
-  fetch(`http://localhost:3000/product_info/${productId}`)
-    .then(response => response.json())
+  const token = localStorage.getItem("token");
+  fetch(`http://localhost:3000/product_info/${productId}`, {
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("No autorizado o error en la API");
+      }
+      return response.json();
+    })
     .then(product => {
       showProductInfo(product);
       showRelatedProducts(product.relatedProducts);
@@ -160,10 +170,19 @@ document.addEventListener("DOMContentLoaded", () => {
 // 🔹 Función para obtener los comentarios
 function fetchCommentedProducts() {
   const productId = localStorage.getItem("selectedProductId");
-  const url = `http://localhost:3000/products_comments/${productId}`;
+  const token = localStorage.getItem("token");
 
-  fetch(url)
-    .then(response => response.json())
+  fetch(`http://localhost:3000/products_comments/${productId}`, {
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("No autorizado al cargar comentarios");
+      }
+      return response.json();
+    })
     .then(comments => {
       showCommentedProducts(comments);
     })
@@ -171,6 +190,7 @@ function fetchCommentedProducts() {
       console.error("Error al cargar los comentarios:", error);
     });
 }
+
 
 // 🔹 Función para mostrar los comentarios
 function showCommentedProducts(comments) {

@@ -1,21 +1,44 @@
 let catId = localStorage.getItem("catID");
 let allProducts = []; 
 let filteredProducts = []; 
-
 fetchProductsByCategory(catId);
 
 function fetchProductsByCategory(catId) {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    alert("Debes iniciar sesión.");
+    window.location.href = "login.html";
+    return;
+  }
+
   const url = `http://localhost:3000/products/${catId}`;
-  fetch(url)
-    .then(response => response.json())
+
+  fetch(url, {
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("No autorizado o error en la API");
+      }
+      return response.json();
+    })
     .then(data => {
+      console.log("DATA RECIBIDA:", data);
+
       showCategoryName(data.catName);
       allProducts = data.products;
       filteredProducts = [...allProducts];
       showProducts(filteredProducts);
     })
-    .catch(error => console.error("Error al cargar los productos:", error));
+    .catch(error => {
+      console.error("Error al cargar los productos:", error);
+      alert("Error al cargar productos: " + error.message);
+    });
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
   fetchProductsByCategory(catId);

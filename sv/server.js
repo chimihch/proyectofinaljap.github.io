@@ -7,29 +7,26 @@ const pInfoRoutes = require('./routes/products')
 const comments = require('./routes/products_comments')
 
 const users = require('./users')
+const auth = require('./middleware/auth');  // <-- NUEVO
 
 const app = express(); 
 const PORT = 3000; 
 
 // Middlewares 
-app.use(cors()); // Permitir peticiones desde el frontend 
-app.use(express.json()); // Parsear JSON en el body 
-app.use(express.static('.')); // Servir archivos estáticos 
+app.use(cors()); 
+app.use(express.json()); 
+app.use(express.static('.')); 
 
-
-app.use('/products', productRoutes);
-app.use('/categories', catRoutes);
-app.use('/product_info', pInfoRoutes);
-app.use('/products_comments', comments);
-
+// Rutas públicas (NO requieren token)
 app.use('/users', users);
+
+// Rutas protegidas (requieren token)
+app.use('/products', auth, productRoutes);
+app.use('/categories', auth, catRoutes);
+app.use('/product_info', auth, pInfoRoutes);
+app.use('/products_comments', auth, comments);
 
 // Iniciar servidor 
 app.listen(PORT, () => { 
     console.log(`Servidor corriendo en http://localhost:${PORT}`); 
-    console.log('GET, PUT, DELETE /products/:id || /product_info/:id || /products_comments/:id');
-    console.log('GET, POST /products || /product_info || /products_comments');
-    console.log('GET /categories || /categories/:id');
-    console.log('POST /users/login');
-}); 
-
+});
