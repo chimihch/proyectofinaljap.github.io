@@ -30,8 +30,12 @@ app.use('/products_comments', auth, comments);
 app.listen(PORT, () => { 
     console.log(`Servidor corriendo en http://localhost:${PORT}`); 
 
+    console.log(' ');
+    console.log('POST /users/login');
     console.log('GET, PUT, DELETE /products/:id || /product_info/:id || /products_comments/:id');
     console.log('GET, POST /products || /product_info || /products_comments');
     console.log('GET /categories || /categories/:id');
-    console.log('POST /users/login');
+    console.log(' ');
+    console.log('Autorizacion POSTMAN: POSTeá el json especificado en el acta documental en /users/login y pegá el token');
+    console.log('                      generado en la pestaña "Auth" -> type:"Bearer Token" para acceder a las rutas protegidas.')
 });
