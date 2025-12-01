@@ -29,4 +29,9 @@ app.use('/products_comments', auth, comments);
 // Iniciar servidor 
 app.listen(PORT, () => { 
     console.log(`Servidor corriendo en http://localhost:${PORT}`); 
+
+    console.log('GET, PUT, DELETE /products/:id || /product_info/:id || /products_comments/:id');
+    console.log('GET, POST /products || /product_info || /products_comments');
+    console.log('GET /categories || /categories/:id');
+    console.log('POST /users/login');
 });
